@@ -7,6 +7,10 @@ verify_ssl = true
 
 [packages]
 pandas = "*"
+gcm-analyzer = {editable = true,path = "."}
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+gcm_analyzer = "python main.py"
