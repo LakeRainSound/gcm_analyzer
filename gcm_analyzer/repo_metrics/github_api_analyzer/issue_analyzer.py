@@ -2,7 +2,7 @@ import pandas
 import json
 
 
-def create_result_list():
+def _create_result_list():
     result_list = {
                     "nameWithOwner": [],
                     "hasIssuesEnabled": [],
@@ -12,18 +12,18 @@ def create_result_list():
     return result_list
 
 
-def add_result_list(result_list: dict, result: dict):
+def _add_result_list(result_list: dict, result: dict):
     for key in result_list.keys():
         result_list[key].append(result[key])
 
     return result_list
 
 
-def get_all_issues_info(repo_result, repo_list):
-    result_list = create_result_list()
+def get_all_issues_info(repository_result, repository_list):
+    result_list = _create_result_list()
 
-    for repo_name in repo_list:
-        result_list = add_result_list(result_list, repo_result[repo_name])
+    for repo_name in repository_list:
+        result_list = _add_result_list(result_list, repository_result[repo_name])
 
     print(json.dumps(result_list, indent=4))
 
