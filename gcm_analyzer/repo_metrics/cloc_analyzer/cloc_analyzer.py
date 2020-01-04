@@ -53,7 +53,7 @@ def get_one_repo_cloc(cloc_result: dict, lang_list, loc_args):
 
 
 def create_result_list(loc_args):
-    all_result = {'repo_name': [], 'cloc_sum': []}
+    all_result = {'nameWithOwner': [], 'cloc_sum': []}
     # clocで取得するargを全て追加
     for loc_arg in loc_args:
         all_result[loc_arg] = []
@@ -76,7 +76,7 @@ def get_all_repo_cloc(repo_result, repo_list, lang_list, loc_args):
 
         # clocの結果にrepo_nameを付け足す
         result = get_one_repo_cloc(cloc_result, lang_list, loc_args)
-        result['repo_name'] = repo_name
+        result['nameWithOwner'] = repo_name
         # 結果を付け足す
         all_result = add_result_list(all_result, result)
     print(json.dumps(all_result, indent=4))
