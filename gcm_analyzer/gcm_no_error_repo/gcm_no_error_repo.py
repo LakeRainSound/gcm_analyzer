@@ -4,22 +4,23 @@ import sys
 class RepositoryList:
     def __init__(self, repository_list, gcm_result, number_of_repo: int):
         self.repository_list = repository_list
+        self.error_repository_list = []
         self.gcm_result = gcm_result
         self.number_of_repo = number_of_repo
 
     @staticmethod
-    def _is_error(repo_name, result_dict):
+    def _is_error(repository_name, result_dict):
         if 'errors' in result_dict:
-            print('ERROR: {}'.format(repo_name))
+            print('ERROR: {}'.format(repository_name))
             for error in result_dict['errors']:
                 print(error['message'])
             return True
 
         return False
 
-    def _repository_exists(self, repo_name):
-        if not(repo_name in self.gcm_result.keys()):
-            print('ERROR: {} doesn\'t exist in gcm result file'.format(repo_name))
+    def _repository_exists(self, repository_name):
+        if not(repository_name in self.gcm_result.keys()):
+            print('ERROR: {} \ndoesn\'t exist in gcm result file'.format(repository_name))
             return False
 
         return True
@@ -29,6 +30,13 @@ class RepositoryList:
         if len(no_error_repo_list) == 0:
             print("ERROR: No Repository which has no error.", file=sys.stderr)
             sys.exit(1)
+
+    def get_error_repo_list(self):
+        if len(self.error_repository_list) == 0:
+            return
+
+        for error_repo in self.error_repository_list:
+            print(error_repo)
 
     def get_no_error_repo_list(self):
         no_error_repo_list = []
@@ -55,6 +63,8 @@ class RepositoryList:
                 no_error_repo_list.append(repo_name)
                 repository_set.add(repo_name)
                 i += 1
+            else:
+                self.error_repository_list.append(repo_name)
 
             if i == self.number_of_repo:
                 break

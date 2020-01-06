@@ -80,3 +80,4 @@ def get_all_cloc_info(repository_result, repository_list, lang_list, loc_args):
         # 結果を付け足す
         all_result = _add_result_list(all_result, result)
     print(json.dumps(all_result, indent=4))
+    return all_result
