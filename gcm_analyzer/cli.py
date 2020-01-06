@@ -11,7 +11,7 @@ class CLI:
         self.repository_list_file = Path('')  # type: Path
         self.output_file = None
         self.lang_file = None
-        self.analyze_num = -1
+        self.analyze_num = None
         self.loc_arg = None
 
     def _set_argument(self):
@@ -34,7 +34,7 @@ class CLI:
         parser.add_argument('--num',
                             '-n',
                             type=int,
-                            default=-1,
+                            default=None,
                             help='analyze a number of repositories')
 
         parser.add_argument('--lang',
@@ -55,12 +55,8 @@ class CLI:
         self.repository_list_file = args.repo
         self.output_file = args.out.expanduser().resolve()  # type: Path
 
-        # analyze_numに，numが0より大きいならnumを，そうでないならgcm resultのリポジトリ数を入れる
-        if args.num > 0:
-            self.analyze_num = args.num  # type: int
-        else:
-            self.analyze_num = len(self.gcm_result['repository'].keys())
-            print(self.analyze_num)
+        # analyze_numに入力を代入
+        self.analyze_num = args.num  # type: int
 
         self.lang_file = args.lang  # type: Path
         self.loc_arg = args.loc
@@ -90,6 +86,9 @@ class CLI:
 
     @staticmethod
     def _get_number_of_analysis(analyze_num: int, repo_num):
+        if analyze_num is None:
+            analyze_num = repo_num
+
         if repo_num < analyze_num:
             analyze_num = repo_num
 
