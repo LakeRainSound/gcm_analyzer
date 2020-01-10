@@ -8,6 +8,7 @@ from gcm_analyzer.gcm_out.gcm_out import gcm_out_call
 
 def main():
     result_list = []
+
     parser = CLI()
     gcm_result, repository_list, path_to_output_file, analyze_num, lang_list, loc_args = parser.parse()
 
