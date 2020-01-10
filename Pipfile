@@ -13,4 +13,4 @@ gcm-analyzer = {editable = true,path = "."}
 python_version = "3.7"
 
 [scripts]
-gcm_analyzer = "python main.py"
+gcm_analyzer = "python gcm_analyzer/main.py"

@@ -17,7 +17,7 @@ def out_csv(result: DataFrame, path_to_output_file: Path):
 
 def out_issues_enabled(result: DataFrame):
     has_issue_unenabled_list = result[result['hasIssuesEnabled'] != True]
-    print('\nIssue Page Enabled Repository per All ')
+    print('\nIssue Page Disenabled Repository per All ')
     print('{}% ({}/{})'.format(len(has_issue_unenabled_list)/len(result)*100,
                                len(has_issue_unenabled_list),
                                len(result)))
